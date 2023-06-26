@@ -51,6 +51,21 @@ public class Controle {
     public long contador(){
         return acao.count();
     }
+
+    @GetMapping("/api/ordenarNomes")
+    public List<Pessoa> ordenarNomes(){
+        return acao.findByOrderByNome();
+    }
+
+    @GetMapping("api/ordenarNomesPorIdade")
+    public List<Pessoa> ordenarNomesPorIdade(){
+        return acao.findByNomeOrderByIdade("Vinícius");
+    }
+
+    @GetMapping("api/nomeContem")
+    public List<Pessoa> nomeContem(){
+        return acao.findByNomeContaining("go");
+    }
     
     @GetMapping("")
     public String mensagem(){

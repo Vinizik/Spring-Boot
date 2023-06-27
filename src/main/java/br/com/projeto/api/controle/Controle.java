@@ -20,39 +20,39 @@ public class Controle {
     @Autowired
     private Repositorio acao;
 
-    @PostMapping("/api")
+    @PostMapping("api")
     public Pessoa cadastrar(@RequestBody Pessoa obj){
         return acao.save(obj);
     }
 
-    @GetMapping("/api")
+    @GetMapping("api")
     public List<Pessoa> selecionar(){
         return acao.findAll();
     }
 
-    @GetMapping("/api/{codigo}")
+    @GetMapping("api/{codigo}")
     public Pessoa selecionarPeloCodigo(@PathVariable int codigo){
         return acao.findByCodigo(codigo);
     }
 
-    @PutMapping("/api")
+    @PutMapping("api")
     public Pessoa editar(@RequestBody Pessoa obj){
         return acao.save(obj);
     }
 
-    @DeleteMapping("/api/{codigo}")
+    @DeleteMapping("api/{codigo}")
     public void remover(@PathVariable int codigo){
         Pessoa obj = selecionarPeloCodigo(codigo);
 
         acao.delete(obj);
     }
 
-    @GetMapping("/api/contador")
+    @GetMapping("api/contador")
     public long contador(){
         return acao.count();
     }
 
-    @GetMapping("/api/ordenarNomes")
+    @GetMapping("api/ordenarNomes")
     public List<Pessoa> ordenarNomes(){
         return acao.findByOrderByNome();
     }
@@ -64,7 +64,27 @@ public class Controle {
 
     @GetMapping("api/nomeContem")
     public List<Pessoa> nomeContem(){
-        return acao.findByNomeContaining("go");
+        return acao.findByNomeContaining("a");
+    }
+
+    @GetMapping("api/iniciaCom")
+    public List<Pessoa> iniciaCom(){
+        return acao.findByNomeStartsWith("vi");
+    }
+
+    @GetMapping("api/terminaCom")
+    public List<Pessoa> terminaCom(){
+        return acao.findByNomeEndsWith("go");
+    }
+
+    @GetMapping("api/somaIdades")
+    public int somaIdades(){
+        return acao.somaIdades();
+    }
+
+    @GetMapping("api/idadeMaiorIgual")
+    public List<Pessoa> idadeMaiorIgual(){
+        return acao.idadeMaiorIgual(54);
     }
     
     @GetMapping("")
